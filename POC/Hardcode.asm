@@ -1,5 +1,12 @@
 BITS 64
 
+; It's important to note, not all kernel32.dll are alike.
+; The last update to kernel32.dll with new functions was
+; in 2019, and this could change at any given time. If a
+; user does not have an up-to-date Windows machine, this
+; shellcode could very well not work. These are merely
+; POCs as to what can be done in assembly.
+
 get_kernel32:
     mov   rax,   gs:[0x60]
     mov   rax,   [rax + 0x18]
