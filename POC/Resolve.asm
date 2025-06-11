@@ -55,40 +55,40 @@ get_wsaconnect:
     jmp   start_functions
 
 parse_module:
-    mov   edx, [r9 + 0x3C]
-    lea   rdx, [r9 + rdx]
-    mov   edx, [rdx + 0x88]
-    lea   rdx, [r9 + rdx]
-    mov   ecx, [rdx + 0x18]
-    mov   edi, [rdx + 0x20]
-    lea   rdi, [r9 + rdi]
+    mov   edx,   [r9 + 0x3C]
+    lea   rdx,   [r9 + rdx]
+    mov   edx,   [rdx + 0x88]
+    lea   rdx,   [r9 + rdx]
+    mov   ecx,   [rdx + 0x18]
+    mov   edi,   [rdx + 0x20]
+    lea   rdi,   [r9 + rdi]
 
 search_loop:
     dec   rcx
-    mov   esi, [rdi + rcx * 4]
-    lea   rsi, [r9 + rsi]
-    xor   rax, rax
-    xor   rbx, rbx
+    mov   esi,   [rdi + rcx * 4]
+    lea   rsi,   [r9 + rsi]
+    xor   rax,   rax
+    xor   rbx,   rbx
     cld
 
 hash_loop:
     lodsb
-    test  al, al
+    test  al,    al
     jz    compare_hash
-    ror   ebx, 7 ;)
-    add   ebx, eax
+    ror   ebx,   7 ;)
+    add   ebx,   eax
     jmp   hash_loop
 
 compare_hash:
-    cmp   ebx, r10d
+    cmp   ebx,   r10d
     jnz   search_loop
-    mov   eax, [rdx + 0x24]
-    lea   rax, [r9 + rax]
-    movzx ecx, word [rax + rcx * 2]
-    mov   eax, [rdx + 0x1C]
-    lea   rax, [r9 + rax]
-    mov   eax, [rax + rcx * 4]
-    lea   rax, [r9 + rax]
+    mov   eax,   [rdx + 0x24]
+    lea   rax,   [r9 + rax]
+    movzx ecx,   word [rax + rcx * 2]
+    mov   eax,   [rdx + 0x1C]
+    lea   rax,   [r9 + rax]
+    mov   eax,   [rax + rcx * 4]
+    lea   rax,   [r9 + rax]
     ret
 
 start_functions:
