@@ -1,5 +1,15 @@
 BITS 64
 
+; As with address resolution, because it is very, very
+; unlikely that windows pushes such an update to move
+; where to resolve the structures and function names, this
+; code is more or less Full-Proof.
+
+; Resolving functions is the best bet, and way more
+; reliable across all versions of Windows x64.
+
+; This code is merely POC as to what can be done.
+
 get_kernel32:
     mov   rax,   gs:[0x60]
     mov   rax,   [rax + 0x18]
