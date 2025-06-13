@@ -45,14 +45,6 @@ p0cket-shell.py --payload  [hardcode | resolve]
 
 ```
 p0cket-shell.py -p hardcode -lh 192.168.1.190 -lp 1337 -f python
-            ____       __        __             __         ____
-     ____  / __ \_____/ /_____  / /_      _____/ /_  ___  / / /
-    / __ \/ / / / ___/ //_/ _ \/ __/_____/ ___/ __ \/ _ \/ / /
-   / /_/ / /_/ / /__/ ,< /  __/ /_/_____(__  ) / / /  __/ / /
-  / .___/\____/\___/_/|_|\___/\__/     /____/_/ /_/\___/_/_/
- /_/
- Author: SilentisVox
- Github: https://github.com/SilentisVox/p0cket-shell
 
 [*] Payload size: 278 bytes
 [*] Final size of python file: 1387 bytes
