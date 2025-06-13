@@ -71,53 +71,6 @@ load_ws2_32:
 
 Now from here we can grab the functions within the 2 libraries and then use them how we want. We have to remember how each function behaves and remember whats needed for each function.
 
-###### Perform function calls
-
-```c
-int WSAStartup(
-  WORD                 wVersionRequested,
-  LPWSADATA            lpWSAData
-);
-```
-
-```c
-SOCKET WSASocketA(
-  int                  af,
-  int                  type,
-  int                  protocol,
-  LPWSAPROTOCOL_INFOA  lpProtocolInfo,
-  GROUP                g,
-  DWORD                dwFlags
-);
-```
-
-```c
-int WSAConnect(
-  SOCKET               s,
-  const sockaddr      *name,
-  int                  namelen,
-  LPWSABUF             lpCallerData,
-  LPWSABUF             lpCalleeData,
-  LPQOS                lpSQOS,
-  LPQOS                lpGQOS
-);
-```
-
-```c
-BOOL CreateProcessA(
-  LPCSTR                lpApplicationName,
-  LPSTR                 lpCommandLine,
-  LPSECURITY_ATTRIBUTES lpProcessAttributes,
-  LPSECURITY_ATTRIBUTES lpThreadAttributes,
-  BOOL                  bInheritHandles,
-  DWORD                 dwCreationFlags,
-  LPVOID                lpEnvironment,
-  LPCSTR                lpCurrentDirectory,
-  LPSTARTUPINFOA        lpStartupInfo,
-  LPPROCESS_INFORMATION lpProcessInformation
-);
-```
-
 ### Finding Functions
 
 Now this is the main issue with making tiny shellcode. We want the most reliable/stable, while also providing a very small size. If we do not care for these, we can make very small shellcode.
