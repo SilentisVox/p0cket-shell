@@ -117,3 +117,56 @@ BOOL CreateProcessA(
   LPPROCESS_INFORMATION lpProcessInformation
 );
 ```
+
+### Finding Functions
+
+Now this is the main issue with making tiny shellcode. We want the most reliable/stable, while also providing a very small size. If we do not care for these, we can make very small shellcode.
+
+All we would need to do is have a hardcoded offset from the module base address.
+
+###### Hardcode Offset
+
+```nasm
+get_createprocess:
+    lea   r15,   [rbp + 0x44F70] ; Hardcode offset from base address
+```
+
+If we wish to maintain reliablity and stabilty, we must parse through the desired libraries AddressOfNames, and match it to one we have. The best way to accomplish this would be hashes.
+
+We need a custom mini hash algorithm to make hashes of our desired functions, then we would need to find a function name, hash it, then compare to what we have. If it matches, save the address and return.
+
+### Hashing Algorithm
+
+###### Calculate Hash User Side
+
+```python
+def hash(function_name: bytes, rotate_amount: int):
+    calculated_hash                     = 0
+
+    for byte in function_name:
+        calculated_hash                 = ((calculated_hash >> rotate_amount) | (calculated_hash << (32 - rotate_amount))) & 0xFFFFFFFF
+        calculated_hash                 = (calculated_hash + byte) & 0xFFFFFFFF
+
+    return hex(calculated_hash)
+```
+
+###### Calculate Hash Machine Side
+
+```nasm
+    xor   rax, rax
+    xor   rbx, rbx
+    cld
+
+hash_loop:
+    lodsb
+    test  al,    al
+    jz    compare_hash
+    ror   ebx,   7 ;)
+    add   ebx,   eax
+    jmp   hash_loop
+
+compare_hash:
+    cmp   ebx,   rdx ; Or wherever you have the hash
+    jz    hash_found
+    jnz   next_function
+```
