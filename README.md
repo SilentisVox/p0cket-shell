@@ -1,7 +1,5 @@
 ﻿<div align="center" markdown="1">
-   <a href="https://www.warp.dev/windebloat">
-      <img alt="Warp sponsorship" width="736" src="https://github.com/SilentisVox/p0cket-shell/blob/master/assets/p0cket-shell.jpg">
-   </a>
+  <img alt="Warp sponsorship" width="736" src="https://github.com/SilentisVox/p0cket-shell/blob/master/assets/p0cket-shell.jpg">
 </div>
 
 # p0cket-shell
