@@ -45,8 +45,8 @@ get_wsasocket:
     call  parse_module
     mov   r13,   rax
 
-get_wsaconnect:
-    mov   r10,   0xb8784b10
+get_connect:
+    mov   r10,   0xC0577762
     call  parse_module
     mov   r12,   rax
     jmp   start_functions
@@ -110,17 +110,16 @@ call_wsa_socket:
     call  r13
     mov   r14,   rax
 
-call_wsa_connect:
+call_connect:
+    sub   rsp,   0x28
+    xor   rax,   rax
+    push  rax
+    mov   rax,   0x0100007F5C110002
+    push  rax
+    mov   rdx,   rsp
     mov   rcx,   r14
-    mov   rdx,   0x0100007F5C110002
-    mov   [rsp], rdx
-    lea   rdx,   [rsp]
-    xor   r8,    r8
-    mov   r8b,   0x16
-    sub   rsp,   0x38
-    mov   [rsp + 0x20], r9
-    mov   [rsp + 0x28], r9
-    mov   [rsp + 0x30], r9
+    mov   r8b,   0x10
+    sub   rsp,   0x10
     call  r12
     add   rsp,   0x38
 

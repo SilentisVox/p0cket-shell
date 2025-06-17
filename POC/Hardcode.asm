@@ -35,8 +35,8 @@ get_wsa_startup:
 get_wsa_socket:
     lea   r13,   [rax + 0x2BA40]
 
-get_wsa_connect:
-    lea   r12,   [rax + 0x4A00]
+get_connect:
+    lea   r12,   [rax + 0x5F50]
 
 call_wsa_startup:
     xor   rcx,   rcx
@@ -58,17 +58,16 @@ call_wsa_socket:
     call  r13
     mov   r14,   rax
 
-call_wsa_connect:
+call_connect:
+    sub   rsp,   0x28
+    xor   rax,   rax
+    push  rax
+    mov   rax,   0x0100007F5C110002
+    push  rax
+    mov   rdx,   rsp
     mov   rcx,   r14
-    mov   rdx,   0x0100007F5C110002
-    mov   [rsp], rdx
-    lea   rdx,   [rsp]
-    xor   r8,    r8
-    mov   r8b,   0x16
-    sub   rsp,   0x38
-    mov   [rsp + 0x20], r9
-    mov   [rsp + 0x28], r9
-    mov   [rsp + 0x30], r9
+    mov   r8b,   0x10
+    sub   rsp,   0x10
     call  r12
     add   rsp,   0x38
 
