@@ -1,5 +1,6 @@
 ﻿<div align="center" markdown="1">
   <img alt="Warp sponsorship" width="736" src="https://github.com/SilentisVox/p0cket-shell/blob/master/assets/p0cket-shell.jpg">
+  <br>
   <sup>Special thanks to Waffles</sup>
 </div>
 
