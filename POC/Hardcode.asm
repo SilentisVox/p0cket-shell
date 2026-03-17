@@ -65,7 +65,7 @@ RUN_WSASOCKETA:
 
 RUN_CONNECT:
         MOV     ECX,     EAX
-        MOV     RAX,     0xcccccccccccc0002
+        MOV     RAX,     0xXXXXXXXXXXXX0002
         PUSH    RAX
         MOV     RDX,     RSP
         MOV     R8B,     0x10

